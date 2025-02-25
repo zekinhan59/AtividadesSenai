@@ -1,0 +1,74 @@
+  //Atividade 1
+
+  int valor = 600;
+  int valorRemapeado = map(valor, 0, 1023, 0, 100);
+  int valorConstrain = constrain(valorRemapeado, 20, 80);
+  float resultadoReal = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+
+  Serial.print("Valor final eh: ");
+  Serial.println(valorConstrain);
+  
+  //atividade 2
+  
+  int contador = 0;
+  
+  contador +=1;
+
+  Serial.println("Contando de 0 a 10");
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  contador++;
+  Serial.println(contador);
+  
+  contador -=1;
+  
+  Serial.println("Diminuindo de 10 para 0");
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  contador--;
+  Serial.println(contador);
+  
+  //atividade 3
+  
+  int valor1 = 10;
+  int valor2 = 12;
+  
+  float media = (valor1 + valor2) / 2.0;
+  
+  Serial.println("A media eh: ");
+  Serial.println(media, 1);	
+}
