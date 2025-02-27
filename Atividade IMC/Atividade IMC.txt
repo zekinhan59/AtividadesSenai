@@ -1,0 +1,46 @@
+/*
+Autor: Thomas Anderson
+Data: 26/02/2025
+Descricao: Atividade IMC
+*/
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  float peso = 69;
+  float altura = 1.77;
+  float imc = 50;
+  
+  imc = peso /sq (altura);
+  Serial.println(imc);
+  
+  if (imc < 18){
+  Serial.println("Abaixo do peso normal");
+    
+  }else if (imc >= 18 && imc < 24){
+  Serial.println("Peso normal");
+  
+  }else if (imc >= 25 && imc < 29){
+  Serial.println("Sobre peso");
+  
+  }else if (imc >= 30 && imc < 34){
+  Serial.print("Obesidade de Grau I");
+  
+  }else if (imc >= 35 && imc < 39){
+  Serial.print("Obesidade de Grau II");
+  
+  }else{
+  Serial.print("Obesidade de Grau III");
+    
+  }
+  
+  
+  
+  
+}
+
+void loop()
+{
+
+}
