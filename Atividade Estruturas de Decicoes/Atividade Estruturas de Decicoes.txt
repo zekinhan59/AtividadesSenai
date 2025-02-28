@@ -1,0 +1,104 @@
+#define pinledAlarme 13
+#define pinledBateria 12
+#define pinledPar 0
+
+void setup()
+{
+  Serial.begin(9600);
+  float temperatura = 29;
+  pinMode(pinledAlarme, OUTPUT);
+  pinMode(pinledBateria, OUTPUT);
+  pinMode(pinledPar, OUTPUT);
+  
+  if (temperatura >= 30){
+  digitalWrite(pinledAlarme, HIGH);
+  }
+  
+  
+  //Atividade 2
+  
+  float bateria = 21;
+  
+  if (bateria <= 20){
+    digitalWrite(pinledBateria, HIGH);
+  }
+
+  
+ // Atividade 3
+
+  int numero = 4;
+
+  int resultadoResto = numero % 2;
+
+  if (resultadoResto == 0){
+  digitalWrite(pinledPar, HIGH);
+}
+  
+  // Atividade 4
+  
+  int numerosPosi = -2;
+  
+  if (numerosPosi > 0){
+  Serial.println("Numero e positivo");
+  }else if (numerosPosi < 0){
+  Serial.println("Numero e Negativo");
+  }
+  
+  //Atividade 5
+  
+  int salario = 1000;
+  int resultado = 0;
+  
+  if (salario < 1000){
+   resultado = salario * 10 / 100;}
+  Serial.println("Nome: Thomas Anderson");
+  Serial.println("Cargo: Funcionario");
+  Serial.print("Foi acrescentado em seu salario: ");
+  Serial.println(resultado);
+  
+  
+  //Atividade 6
+  
+  int salario2 = 500;
+  int resultado2 = 0;
+  
+  if (salario2 < 500){
+  resultado2 = salario2 * 30 / 100;}
+  Serial.print("Salario reajustado e: ");
+  Serial.println(resultado2);
+  
+  //Atividade 7
+  
+  int valor1 = 500;
+  int valor2 = 499;
+  
+  if (valor1 > valor2){
+  Serial.println("Valor 1 e maior");
+  }else if (valor2 > valor1){
+  Serial.println("Valor 2 e maior");
+  }
+
+  //Atividade 8
+  
+  int nota1 = 8 ;
+  int nota2 = 9 ;
+  int nota3 = 10 ;
+  int nota4 = 4 ;
+  float media = 0;
+  
+  media = (nota1+nota2+nota3+nota4) / 4.0;
+  if (media >= 7){
+  Serial.println("Aprovado");
+  }else if (media < 7){
+  Serial.println("Reprovado");
+  }
+  
+  
+    
+    
+}
+
+void loop()
+{
+
+}
