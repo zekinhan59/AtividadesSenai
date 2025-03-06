@@ -1,0 +1,74 @@
+/*
+Nome: Thomas ANderson Araujo Viana
+Data: 06/03/2025
+Programa: Aula 30 - Exercicio Switch Case
+*/
+
+
+
+
+#define pinLedVermelho 13
+#define pinLedLaranja 12
+#define pinLedAmarelo 11
+#define pinLedAzul 10
+#define pinLedVerde 9
+#define pinLedBranco 8
+
+
+
+void setup()
+{
+  pinMode(pinLedVermelho, OUTPUT);
+  pinMode(pinLedLaranja, OUTPUT);
+  pinMode(pinLedAmarelo, OUTPUT);
+  pinMode(pinLedAzul, OUTPUT);
+  pinMode(pinLedVerde, OUTPUT);
+  pinMode(pinLedBranco, OUTPUT);
+  
+  Serial.begin(9600);
+  
+  int clima = 5;
+  
+  switch (clima)
+  {
+  case 0:
+  
+   digitalWrite(pinLedVermelho, HIGH);
+   Serial.println("Pessimo");
+   break;
+    
+  case 1:
+  
+    digitalWrite(pinLedLaranja, HIGH);
+    Serial.println("Ruim");
+  break;
+                 
+  case 2:
+  
+     digitalWrite(pinLedAmarelo, HIGH);            
+     Serial.println("Normal");            
+    break;   
+    
+    case 3:
+    
+    digitalWrite(pinLedAzul, HIGH);
+    Serial.println("Boa");
+    break;
+    
+    case 4:
+      
+    digitalWrite(pinLedVerde, HIGH);        
+    Serial.println("Excelente");        
+    break;        
+            
+    default:        
+            
+    digitalWrite(pinLedBranco, HIGH);        
+    break; 
+  }
+}
+
+void loop()
+{
+
+}
