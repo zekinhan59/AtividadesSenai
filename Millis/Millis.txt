@@ -1,0 +1,32 @@
+/*
+Nome: Thomas Anderson Araujo Vina
+Programa: Millis
+Data:07/03/2025
+*/
+#define pinLed 13
+unsigned long tempoInicial = 0;
+bool estadoLed = 0;
+
+
+void setup()
+{
+ pinMode(pinLed, OUTPUT);
+  
+}
+
+void loop()
+{
+  
+  unsigned long tempoAtual = millis();
+  if(tempoAtual - tempoInicial >= 1000){
+  if ( estadoLed ){
+  digitalWrite( pinLed, LOW);
+  estadoLed = 0;
+  
+    } else { 
+     digitalWrite( pinLed, HIGH);
+     estadoLed = 1;
+    }
+   tempoInicial = tempoAtual;
+  }
+}
