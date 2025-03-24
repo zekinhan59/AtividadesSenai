@@ -1,0 +1,174 @@
+/*
+Nome:Thomas Anderson Araujo Viana
+Data:24/03/2025
+Programa:Botao, Led, Lcd
+*/
+
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+#define valorBotao1 0
+#define valorBotao2 145  
+#define valorBotao3 329  
+#define valorBotao4 505
+#define valorBotao5 741
+#define valorSolto 1023
+#define pinLedA 11
+#define pinLedB 10
+
+
+
+void setup()
+{
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print(">LED A OFF");
+  lcd.setCursor(0,1);
+  lcd.print(" LED B OFF");
+  pinMode(pinLedA, OUTPUT);
+  pinMode(pinLedB, OUTPUT);
+}
+
+void loop()
+{
+    int valorLeituraAnalogica = analogRead(A0);
+    static int valorAnterior = 1023;
+    static bool posicao = 0;
+    static bool estadoLedA = 0;
+    static bool estadoLedB = 0;
+    static int intensidadeA  = 0; 
+    static int intensidadeB = 0;  
+ 
+  //***** TRATAMENTO DOS BOTOES *******
+  // NENHUM BOTAO
+  if (valorLeituraAnalogica == valorSolto)
+   {
+     
+   }
+ 
+  //BOTAO 1 PRESSIONADO
+     else if(valorLeituraAnalogica == valorBotao1 &&
+             valorAnterior == 1023)
+    {
+      posicao = 0;
+    }
+ 
+   //BOTAO 2 PRESSIONADO
+      else if(valorLeituraAnalogica >= valorBotao2 * 0.9  &&
+            valorLeituraAnalogica <= valorBotao2 * 1.1 &&
+            valorAnterior == 1023)
+    {
+      posicao = 1;
+    }
+ 
+   //BOTAO 3 PRESSIONADO
+    else if(valorLeituraAnalogica >= valorBotao3 * 0.9  &&
+            valorLeituraAnalogica <= valorBotao3 * 1.1 &&
+            valorAnterior == 1023)
+    {
+      if(posicao == 0)
+      {
+        if(intensidadeA >= 10)
+      		intensidadeA = intensidadeA - 10;
+      }
+      else
+      {
+        if(intensidadeB >= 10)
+       intensidadeB = intensidadeB - 10;
+      }
+    }
+   
+   //BOTAO 4 PRESSIONADO
+   else if(valorLeituraAnalogica >= valorBotao4 * 0.9  &&
+            valorLeituraAnalogica <= valorBotao4 * 1.1 &&
+            valorAnterior == 1023)
+    {
+      if(posicao == 1)
+      {
+        if(intensidadeB <= 90 )
+      		intensidadeB = intensidadeB + 10;
+      }
+      else
+      {
+        if(intensidadeA <= 90 )
+       intensidadeA = intensidadeA + 10;
+      }
+    }
+ 
+   //BOTAO 5 PRESSIONADO
+      else if(valorLeituraAnalogica >= valorBotao5 * 0.9  &&
+            valorLeituraAnalogica <= valorBotao5 * 1.1 &&
+            valorAnterior == 1023)
+    
+        
+        if(posicao == 0){
+        estadoLedA = !estadoLedA;
+       }
+        else
+       {
+        estadoLedB = !estadoLedB;
+       }
+        
+
+  //****** FIM DO TRATAMENTO DOS BOTOES ******
+ 
+ 
+  // ***** ATUALIZA DISPLAY ******
+  
+  if(posicao == 0)
+  {
+    lcd.setCursor(0,0);
+    lcd.print(">");
+    lcd.setCursor(0,1);
+    lcd.print(" ");
+  }
+  else
+    {
+    lcd.setCursor(0,1);
+    lcd.print(">");
+    lcd.setCursor(0,0);
+    lcd.print(" ");
+    }
+  
+  if(estadoLedA){
+  lcd.setCursor(7, 0);
+
+  lcd.print(intensidadeA);
+    lcd.print("  "); 
+  }
+  else
+  {
+  lcd.setCursor(7, 0);  
+  lcd.print("OFF"); 
+  }
+  
+   if(estadoLedB){
+  lcd.setCursor(7, 1);
+  lcd.print(intensidadeB);  
+  lcd.print("  ");
+  }
+  else
+  {
+  lcd.setCursor(7, 1);
+  lcd.print("OFF"); 
+  }
+  
+  
+  //***** ATUALIZACAO DOS LED ******
+ 
+  if(estadoLedA == 1)
+  {
+  analogWrite(pinLedA, intensidadeA * 2.55);
+  }
+  else
+   digitalWrite(pinLedA, LOW);
+  
+  if(estadoLedB == 1)
+  {
+  analogWrite(pinLedB, intensidadeB * 2.55);
+  }
+  else
+  digitalWrite(pinLedB, LOW);
+}
