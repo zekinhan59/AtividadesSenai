@@ -1,0 +1,53 @@
+#include <Arduino.h> 
+
+// PROTOTIPOS DAS FUNCOES (declaração das funções que serão usadas no código)
+void ligaLed(int pin);
+void desligaLed(int pin);
+void piscaLed(int pin, unsigned long tempo);
+int somaDeDoisNumeros(int numeroA, int numeroB);
+
+
+void setup() 
+{
+  pinMode(2, OUTPUT);  // Define o pino 2 como saída
+  Serial.begin(9600);  // Inicializa o monitor serial 
+}
+
+void loop()
+{
+  piscaLed(2, 100);  // Faz o LED no pino 2 piscar com intervalo de 100ms
+
+    // Chama a função que soma dois números e armazena o resultado
+  int resultadoDaSoma = somaDeDoisNumeros(4, 8);
+
+    // Exibe o resultado da soma no monitor serial
+  Serial.println(resultadoDaSoma);
+}
+
+// Função para ligar o LED 
+void ligaLed(int pin)
+{
+  digitalWrite(pin, HIGH); // (liga o LED)
+}
+
+// Função para desligar o LED no pino especificado
+void desligaLed(int pin)
+{
+  digitalWrite(pin, LOW); // (desliga o LED)
+}
+
+// Função para piscar o LED no pino especificado por um tempo determinado
+void piscaLed(int pin, unsigned long tempo)
+{
+    digitalWrite(pin, HIGH); // Liga o LED
+    delay(tempo); // Aguarda o tempo especificado
+    digitalWrite(pin, LOW);  // Desliga o LED
+    delay(tempo);  // Aguarda novamente o mesmo tempo
+}
+
+// Função que soma dois números e retorna o resultado
+int somaDeDoisNumeros(int numeroA, int numeroB)
+{
+   int resultado = numeroA + numeroB;  // Calcula a soma
+   return resultado;  // Retorna o valor da soma
+}
