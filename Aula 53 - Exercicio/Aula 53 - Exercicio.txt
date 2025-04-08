@@ -1,0 +1,107 @@
+#include <Arduino.h>
+#include <Bounce2.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+Bounce botaoA = Bounce();
+Bounce botaoB = Bounce();
+Bounce botaoC = Bounce();
+
+#define Botao1 15
+#define Botao2 18
+#define Botao3 19
+
+int contagem = 0;
+bool modoSelecao = 1;
+
+int intensidadeLedA = 0;
+int intensidadeLedB = 0;
+int intensidadeLedC = 0;
+int intensidadeLedD = 0;
+
+void setup()
+{
+  lcd.init();
+  lcd.backlight();
+  botaoA.attach(Botao1, INPUT_PULLUP);
+  botaoB.attach(Botao2, INPUT_PULLUP);
+  botaoC.attach(Botao3, INPUT_PULLUP);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  botaoA.update();
+  botaoB.update();
+  botaoC.update();
+
+  if (botaoA.fell())
+  {
+    if (modoSelecao == 1)
+    {
+      contagem++;
+      if (contagem == 4)
+      {
+        contagem = 0;
+        Serial.println(contagem);
+      }
+    }
+    else
+    {
+      if (contagem == 0)
+      {
+        if (intensidadeLedA < 100)
+        {
+          intensidadeLedA += 10;
+        }
+      }
+      if (contagem == 1)
+      {
+        if (intensidadeLedB < 100)
+        {
+          intensidadeLedB += 10;
+        }
+      }
+      if (contagem == 2)
+      {
+        if (intensidadeLedC < 100)
+        {
+          intensidadeLedC += 10;
+        }
+      }
+      if (contagem == 3)
+      {
+        if (intensidadeLedD >= 100)
+        {
+          intensidadeLedD += 10;
+        }
+      }
+    }
+  }
+
+  if (botaoB.fell())
+  {
+    if (modoSelecao == 1)
+    {
+      if (contagem == 3)
+        contagem = contagem;
+      {
+        if (contagem == 0)
+          contagem = 4;
+        {
+          contagem--;
+          Serial.println(contagem);
+        }
+      }
+    }
+  }
+
+  if (botaoC.fell())
+  {
+    modoSelecao = !modoSelecao;
+    Serial.println("BOTAO 3 PRESSIONADO");
+  }
+}
+
+//FEITO ATE O 7 PASSO
